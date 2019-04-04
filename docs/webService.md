@@ -23,16 +23,16 @@ The models are used to represents the concepts which are gonna be manipulated in
 
 ![dao-dto-model](img/global_dao_dto_model.png)
 
-## Rdf Resource Definition
+## RDF Resource Definition
 To represents and manipulate the triplestore resources (instances or concepts), we have created models, DAO and DTO.
 
-### Rdf Resource Definition model
+### RDF Resource Definition model
 To manipulate a resource (instance or concept), we extends the RdfResourceDefinition model, such as the following example.
 
 ![rdf-resource-definition-model](img/rdfResourceDefinition.png)
 
-### Rdf Resource Definiton DTO
-A few services returns more or less the same rdf resource definition JSON format. We have created a few DTO which are extended. In the following example, the RadiometricTargetDTO extends the RdfResourceDefinitionDTO and the RadiometricTargetPostDTO extends the RdfResourceDefinitionPostDTO. We have created a specific package which will contain all the DTO of the radiometric targets.
+### RDF Resource Definiton DTO
+A few services returns more or less the same RDF resource definition JSON format. We have created a few DTO which are extended. In the following example, the RadiometricTargetDTO extends the RdfResourceDefinitionDTO and the RadiometricTargetPostDTO extends the RdfResourceDefinitionPostDTO. We have created a specific package which will contain all the DTO of the radiometric targets.
 
 ![rdf-resource-definition-dto](img/rdfResourceDefinitionDTO.png)
 
