@@ -41,11 +41,11 @@ To manipulate the properties extracted from a semantic triplestore, we use the P
 
 ## How to create new services ?
 You can base your new service on the Provenance and Radiometric Target services.
-1. Create the service class in the resources package (e.g. phis2ws.service.resources.ProvenanceResourceService).
-2. Create the DTO (e.g. phis2ws.service.resources.dto.provenance.ProvenanceDTO).
-3. Create the model (e.g. phis2ws.service.view.model.phis.provenance.Provenance).
-4. Create the DAO if needed (e.g. phis2ws.service.dao.mongo.ProvenanceDAOMongo).
-5. Create the ResponseForm (e.g. phis2ws.service.view.brapi.form.ResponseFormProvenance).
+1. Create the service class in the resources package (e.g. opensilex.service.resources.ProvenanceResourceService).
+2. Create the DTO (e.g. opensilex.service.resources.dto.provenance.ProvenanceDTO).
+3. Create the model (e.g. opensilex.service.view.model.provenance.Provenance).
+4. Create the DAO if needed (e.g. opensilex.service.dao.mongo.ProvenanceDAOMongo).
+5. Create the ResponseForm (e.g. opensilex.service.view.brapi.form.ResponseFormProvenance).
 
 
 ## Java Bean Validation (JSR 380)
