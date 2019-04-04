@@ -23,7 +23,7 @@ The models are used to represents the concepts which are gonna be manipulated in
 
 ![dao-dto-model](img/global_dao_dto_model.png)
 
-## RDF Resource Definition
+![dao-dto-model](img/web_service_architecture.png)
 To represents and manipulate the triplestore resources (instances or concepts), we have created models, DAO and DTO.
 
 ### RDF Resource Definition model
