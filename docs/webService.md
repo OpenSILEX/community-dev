@@ -37,7 +37,7 @@ A few services returns more or less the same rdf resource definition JSON format
 ![rdf-resource-definition-dto](img/rdfResourceDefinitionDTO.png)
 
 ### Property DAO
-To manipulate the properties extracted from a semantic triplestore, we use the PropertyDAOSesame class.
+To manipulate the properties extracted from a semantic triplestore, we use the PropertyDAO class.
 
 ## How to create new services ?
 You can base your new service on the Provenance and Radiometric Target services.
