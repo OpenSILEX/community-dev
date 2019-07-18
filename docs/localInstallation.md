@@ -5,8 +5,8 @@ layout: default
 # OpenSILEX PHIS Deployment
 
 1. [Prerequisite](#1-prerequisite)
-   * [Hardware](#hardware)  
-   * [Software](#software)  
+   * [Hardware](#hardware)
+   * [Software](#software)
      + [MongoDB and Robo 3T](#mongodb-and-robo-3t)
      + [Netbeans and JDK](#netbeans-and-jdk)
      + [Postgresql and PostGIS](#postgresql-and-postgis)
@@ -36,7 +36,7 @@ layout: default
    * [Other problems concerning the web application and the web service](#other-problems-with-the-webapp-and-the-web-service)
 
 ## Introduction
-This document explains you how to deploy OpenSILEX PHIS on your personnal computer.  
+This document explains you how to deploy OpenSILEX PHIS on your personnal computer.
 In this document, commands are for **Ubuntu 16.04**. However, the majority of these commands are compatible with all Debian distributions which have the package manager Aptitude.
 
 ## 1. Prerequisite
@@ -144,8 +144,9 @@ In a terminal, run these commands:
 ```bash  
  sudo apt-get update
  sudo apt-get install postgresql
- sudo apt-get install postgresql-9.5-postgis-2.2
 ```
+
+PostgreSQL version should be **at least** 9.5, so you can use the command `sudo apt-get install postgresql-9.5-postgis-2.2`, or, better : `sudo apt install postgresql-10-postgis-2.4`
 
 Locate the PostgreSQL client with:
 ```{bash}
@@ -210,7 +211,7 @@ You can launch Netbeans from its installation folder by executing the `netbeans`
 ```
 
 #### PHP
-Install PHP 7.0 executing the following commands:
+Install PHP (version 7.0 or higher, OpenSILEX supports also PHP 7.2) executing the following commands:
 ```{bash}
 sudo apt-get update
 sudo apt-get install php php-mbstring php-dom
@@ -219,8 +220,6 @@ Check your PHP version from a terminal:
 ```{bash}
 php --version
 ```
-
-OpenSILEX does currently not support PHP 7.2. Developments are being made to provide this compatibility.
 
 #### Apache Tomcat and RDF4J
 
@@ -241,7 +240,7 @@ cd /home/tomcat/
 tar --owner=<user> -xvzf ~/Downloads/apache-tomcat<version>.tar.gz
 ```
 
-To be consistent with the OpenSILEX PHIS documentation, we recommand you to rename the Apache Tomcat folder so that the version does not appear :
+To be consistent with the OpenSILEX PHIS documentation, we recommend you to rename the Apache Tomcat folder so that the version does not appear :
 ```bash
 mv apache-tomcat<version> apache-tomcat
 ```
@@ -250,7 +249,7 @@ With this procedure, Tomcat is not recognized by Ubuntu services control (`syste
 
 ##### Apache Tomcat configuration
 Tomcat configuration files are located in the `/home/tomcat/apache-tomcat/conf` folder.  
-To use Tomcat manager page you need to define an admin user.  
+To use Tomcat manager page you need to define an admin user.
 To do that edit the `tomcat-users` file:
 ```bash
 nano /home/tomcat/apache-tomcat/conf/tomcat-users.xml
@@ -372,7 +371,7 @@ For information:
 
 They are the three services that you need so if the previous command's result is correct, you can continue to the next section [Prerequisite Files](#files).
 
-Otherwise you have two options:  
+Otherwise you have two options:
 - remember the differences and ajust for the next steps
 - return to the related section ([Tomcat](#apache-tomcat-configuration), [Apache2](#apache-configuration), [PostgreSQL](#postgresql-configuration))
 
@@ -381,28 +380,28 @@ Otherwise you have two options:
 
 ### Files
 
-I recommand you to create a folder where you will download all the required files:
+I recommend you to create a folder where you will download all the required files:
 ```bash
 mkdir ~/OpenSILEX
 ```
 
 #### Web service folder
 
-Get source from GitHub, directly from the `phis-ws` development repository:
+Get source from GitHub, directly from the `phis-ws` development repository, indicating the latest stable release (e.g. `3.2.5` in July 2020) :
 ```bash
 cd ~/OpenSILEX
-git clone https://github.com/OpenSILEX/phis-ws.git
+git clone --branch 3.2.5 https://github.com/OpenSILEX/phis-ws.git
 ```
-Preferably, get the source from the last release at [phis-ws/releases](https://github.com/OpenSILEX/phis-ws/releases) (for example, use `git clone --branch 3.0 https://github.com/OpenSILEX/phis-ws.git` if you want to install the release 3.0).
+Check the latest release tag at [phis-ws/releases](https://github.com/OpenSILEX/phis-ws/releases). If it differs from `3.2.5`, then change the command line above, replacing `3.2.5` by the latest release tag.
 
 #### Web application folder
 
-Get source from GitHub, directly from the phis-webapp development repository:
+Get source from GitHub, directly from the phis-webapp development repository, indicating the latest stable release :
 ```bash
 cd ~/OpenSILEX
-git clone https://github.com/OpenSILEX/phis-webapp.git
+git clone --branch <latest release tag> https://github.com/OpenSILEX/phis-webapp.git
 ```
-Preferably, get the source from the last release at [phis-webapp/releases](https://github.com/OpenSILEX/phis-webapp/releases) (for example, use `git clone --branch 3.0 https://github.com/OpenSILEX/phis-webapp.git` if you want to install the release 3.0).
+Check the latest release tag at [phis-webapp/releases](https://github.com/OpenSILEX/phis-webapp/releases) and change the command line above, replacing `<latest release tag>` by the latest release tag (e.g. `3.2.5` in July 2020).
 
 #### Ontology files
 
@@ -445,7 +444,7 @@ Right click on connection name -> `Create Database` -> enter a name (`phis` in t
 
 Go to http://localhost:8080/. You are in Tomcat server home page.
 
-Click on `Manager App`, connect with your  Tomcat user (a default user is configured in the `home/tomcat/apache-tomcat/tomcat-users.xml` configuration file).  
+Click on `Manager App`, connect with your  Tomcat user (a default user is configured in the `home/tomcat/apache-tomcat/tomcat-users.xml` configuration file).
 
 Search `rdf4j-workbench` in the list, if isn't running, click on `Start`)
 
@@ -461,9 +460,9 @@ Click `Next` and check if is corresponds to this:
 
 Click `Create`.
 
-You will do these steps many times:  
+You will do these steps many times:
 
-Now, Click `Add` in the `Modify` submenu.  
+Now, Click `Add` in the `Modify` submenu.
 
 ![rdf4j-add](img/rdf4j-add.png)
 
@@ -504,7 +503,7 @@ ALTER USER opensilex WITH ENCRYPTED PASSWORD 'azerty';
 
 #### Create the database
 
-We recommand to name the PostgreSQL database with your experimental installation's name.
+We recommend to name the PostgreSQL database with your experimental installation's name.
 Create the PostgreSQL database with the following command:
 ```sql
 CREATE DATABASE <experimental_installation_name> OWNER opensilex;
@@ -565,7 +564,7 @@ To start using or trying OpenSILEX PHIS, two users are created automatically:
 * admin@opensilex.org/admin for administrative rights
 * guest@opensilex.org/guest for restricted rights
 See [OpenSILEX PHIS user documentation](https://opensilex.github.io/phis-docs-community/) for further explanation on users management and how to add new users.
-We recommand you to change the admin password.
+We recommend you to change the admin password.
 
 Check the [OpenSILEX PHIS user documentation](https://github.com/OpenSILEX/phis-docs-community) for more informations about users (eg. adding other users).
 
@@ -627,13 +626,18 @@ mvn install -Ptest
 With no `-P` option, `dev` profile is used.
 
 **Note**<br/>
-If you use netbeans to deploy war file in the Tomcat server, the default port is **8084** but in this document we choose to deploy ourselves our war files so the port need to be the Tomcat service port **8080**.  
+If you use netbeans to deploy war file in the Tomcat server, the default port is **8084** but in this document we choose to deploy ourselves our war files so the port need to be the Tomcat service port **8080**.
 The choice of deploying ourselves our war files is justified by the universality of the procedure. Netbeans is heavy and some pc can have difficulty to run it and other softwares at the same time.
 Using Netbeans enables you to deploy more quickly.
 
-**Warning**
+<style>
+div.orange { background-color:#ffe1a2; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "orange" markdown="1">
+**Warning**<br/>
+</div>
 
-Every time you use the localhost address, you need to use the IP address `127.0.0.1` and not the name `localhost`.
+**Every time you use the localhost address, you need to use the IP address `127.0.0.1` and not the name `localhost`.**
 
 Edit the file `config.properties` of the `dev` profile (you have to adapt values between `< >`).
 You need to change the port with the value chosen for Tomcat (in our case 8080):
@@ -685,6 +689,11 @@ ws.layers.dir=/var/www/html/layers
 ws.layers.url=http://127.0.0.1/layers
 ```
 
+**Note**<br/>
+
+The path that you specify in **ws.log.dir** has to match an existing folder.
+You may need to create one. You can choose freely where to store the log files as their location has little significance.
+
 #### Generate WAR file
 
 When all configuration files are correctly set up you can generate the `.war` file: right click on the project's name -> `Build with depedencies`.
@@ -728,9 +737,13 @@ Otherwise, please go to the [common error](#errors-with-the-web-service) section
 
 #### Folder
 
-The web application deployment is done by Apache2. You have to copy the webapp folder (downloaded from [OpenSILEX/phis-webapp](https://github.com/OpenSILEX/phis-webapp)) in the Apache root folder (in our case `/var/www/html`).
+The web application deployment is done by Apache2. You can either `(1)` copy the webapp folder (downloaded from [OpenSILEX/phis-webapp](https://github.com/OpenSILEX/phis-webapp)) in the Apache root folder (in our case `/var/www/html`), either `(2)` create a symbolic link in the Apache root folder that points to the webapp folder :
 ```bash
+# (1) Copy the webapp folder ...
 sudo cp -r <Git folder>/phis-webapp /var/www/html
+
+# ... OR (2) create a symbolic link thats points to it
+ln -s <Git folder>/phis-webapp/ /var/www/html/phis-webapp
 ```
 Change the permissions of this folder:
 ```
@@ -771,16 +784,19 @@ Go to your webapp folder:
 ```bash
 cd /var/www/html/phis-webapp
 ```
-Run `composer update`:
+Run `composer update` (it takes some time) :
 ```bash
-sudo composer update
+composer update
 ```
-It takes some time.  
 
-It may end in error telling that a PHP package is missing. In this case, install this package:  
+Do NOT run it as super user (no sudo !) as it could cause file access rights issues.
+If problems arise, you can use `composer install --ignore-platform-reqs` when you install dependencies for the PHP project.
+
+It may end in error telling that a PHP package is missing. In this case, install the packages composer ask you to install in its error messages :
 ```
 sudo apt-get install php-<name of the package given by composer>
 ```
+
 Re-run `composer update`. It may end again in error like previously.
 
 Repeat the steps until it ends successfully.
@@ -835,6 +851,12 @@ php composer-setup.php --install-dir=bin --filename=composer
 
 If it doesn't fix the problem, please check the [composer troubleshooting page](https://getcomposer.org/doc/articles/troubleshooting.md).
 
+If you fail to install the packages required by composer, it might be a version issue.
+You can try and add the version of PHP to your command line :
+```
+sudo apt-get install php-7.2-<name of the package given by composer>
+```
+
 ### Errors with PostgreSQL
 
 + FATAL: authentification peer:  
@@ -869,11 +891,11 @@ sudo systemctl restart postgresql
 
 ### Errors with the web service
 
-+ Errors with the generation of the WAR file  
++ Errors with the generation of the WAR file
 
 In Netbeans, right click on the project name -> `Resolve problems`.
 
-If it detects plugin problems, I recommand you to fix them yourself with the menu : `Tools` -> `Plugins`.
+If it detects plugin problems, I recommend you to fix them yourself with the menu : `Tools` -> `Plugins`.
 If it appears to be another problem, you can try to fix it with the `Resolve` button.
 
 But if the problem persists, it probably comes from a modification in a project file. You can try to find it, to reopen the project or to remove all the OpenSILEX web service files and reload them).
