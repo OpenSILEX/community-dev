@@ -387,21 +387,21 @@ mkdir ~/OpenSILEX
 
 #### Web service folder
 
-Get source from GitHub, directly from the `phis-ws` development repository:
+Get source from GitHub, directly from the `phis-ws` development repository, indicating the latest stable release (e.g. `3.2.5` in July 2020) :
 ```bash
 cd ~/OpenSILEX
-git clone https://github.com/OpenSILEX/phis-ws.git
+git clone --branch 3.2.5 https://github.com/OpenSILEX/phis-ws.git
 ```
-Preferably, get the source from the last release at [phis-ws/releases](https://github.com/OpenSILEX/phis-ws/releases) (for example, use `git clone --branch 3.0 https://github.com/OpenSILEX/phis-ws.git` if you want to install the release 3.0).
+Check the latest release tag at [phis-ws/releases](https://github.com/OpenSILEX/phis-ws/releases). If it differs from `3.2.5`, then change the command line above, replacing `3.2.5` by the latest release tag.
 
 #### Web application folder
 
-Get source from GitHub, directly from the phis-webapp development repository:
+Get source from GitHub, directly from the phis-webapp development repository, indicating the latest stable release (e.g. `3.2.5` in July 2020) :
 ```bash
 cd ~/OpenSILEX
-git clone https://github.com/OpenSILEX/phis-webapp.git
+git clone --branch 3.2.5 https://github.com/OpenSILEX/phis-webapp.git
 ```
-Preferably, get the source from the last release at [phis-webapp/releases](https://github.com/OpenSILEX/phis-webapp/releases) (for example, use `git clone --branch 3.0 https://github.com/OpenSILEX/phis-webapp.git` if you want to install the release 3.0).
+Check the latest release tag at [phis-webapp/releases](https://github.com/OpenSILEX/phis-webapp/releases). If it differs from `3.2.5`, then change the command line above, replacing `3.2.5` by the latest release tag.
 
 #### Ontology files
 
@@ -630,9 +630,14 @@ If you use netbeans to deploy war file in the Tomcat server, the default port is
 The choice of deploying ourselves our war files is justified by the universality of the procedure. Netbeans is heavy and some pc can have difficulty to run it and other softwares at the same time.
 Using Netbeans enables you to deploy more quickly.
 
-**Warning**
+<style>
+div.orange { background-color:#ffe1a2; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "orange" markdown="1">
+**Warning**<br/>
+</div>
 
-Every time you use the localhost address, you need to use the IP address `127.0.0.1` and not the name `localhost`.
+**Every time you use the localhost address, you need to use the IP address `127.0.0.1` and not the name `localhost`.**
 
 Edit the file `config.properties` of the `dev` profile (you have to adapt values between `< >`).
 You need to change the port with the value chosen for Tomcat (in our case 8080):
@@ -727,9 +732,13 @@ Otherwise, please go to the [common error](#errors-with-the-web-service) section
 
 #### Folder
 
-The web application deployment is done by Apache2. You have to copy the webapp folder (downloaded from [OpenSILEX/phis-webapp](https://github.com/OpenSILEX/phis-webapp)) in the Apache root folder (in our case `/var/www/html`).
+The web application deployment is done by Apache2. You can either `(1)` copy the webapp folder (downloaded from [OpenSILEX/phis-webapp](https://github.com/OpenSILEX/phis-webapp)) in the Apache root folder (in our case `/var/www/html`), either `(2)` create a symbolic link in the Apache root folder that points to the webapp folder :
 ```bash
+# (1) Copy the webapp folder ...
 sudo cp -r <Git folder>/phis-webapp /var/www/html
+
+# ... OR (2) create a symbolic link thats points to it
+ln -s <Git folder>/phis-webapp/ /var/www/html/phis-webapp
 ```
 Change the permissions of this folder:
 ```
@@ -770,16 +779,19 @@ Go to your webapp folder:
 ```bash
 cd /var/www/html/phis-webapp
 ```
-Run `composer update`:
+Run `composer update` (it takes some time) :
 ```bash
-sudo composer update
+composer update
 ```
-It takes some time.  
 
-It may end in error telling that a PHP package is missing. In this case, install this package:  
+Do NOT run it as super user (no sudo !) as it could cause file access rights issues.
+If problems arise, you can use `composer install --ignore-platform-reqs` when you install dependencies for the PHP project.
+
+It may end in error telling that a PHP package is missing. In this case, install the packages composer ask you to install in its error messages :
 ```
 sudo apt-get install php-<name of the package given by composer>
 ```
+
 Re-run `composer update`. It may end again in error like previously.
 
 Repeat the steps until it ends successfully.
@@ -833,6 +845,12 @@ php composer-setup.php --install-dir=bin --filename=composer
 ```
 
 If it doesn't fix the problem, please check the [composer troubleshooting page](https://getcomposer.org/doc/articles/troubleshooting.md).
+
+If you fail to install the packages required by composer, it might be a version issue.
+You can try and add the version of PHP to your command line :
+```
+sudo apt-get install php-7.2-<name of the package given by composer>
+```
 
 ### Errors with PostgreSQL
 
