@@ -240,7 +240,7 @@ cd /home/tomcat/
 tar --owner=<user> -xvzf ~/Downloads/apache-tomcat<version>.tar.gz
 ```
 
-To be consistent with the OpenSILEX PHIS documentation, we recommand you to rename the Apache Tomcat folder so that the version does not appear :
+To be consistent with the OpenSILEX PHIS documentation, we recommend you to rename the Apache Tomcat folder so that the version does not appear :
 ```bash
 mv apache-tomcat<version> apache-tomcat
 ```
@@ -249,7 +249,7 @@ With this procedure, Tomcat is not recognized by Ubuntu services control (`syste
 
 ##### Apache Tomcat configuration
 Tomcat configuration files are located in the `/home/tomcat/apache-tomcat/conf` folder.  
-To use Tomcat manager page you need to define an admin user.  
+To use Tomcat manager page you need to define an admin user.
 To do that edit the `tomcat-users` file:
 ```bash
 nano /home/tomcat/apache-tomcat/conf/tomcat-users.xml
@@ -371,7 +371,7 @@ For information:
 
 They are the three services that you need so if the previous command's result is correct, you can continue to the next section [Prerequisite Files](#files).
 
-Otherwise you have two options:  
+Otherwise you have two options:
 - remember the differences and ajust for the next steps
 - return to the related section ([Tomcat](#apache-tomcat-configuration), [Apache2](#apache-configuration), [PostgreSQL](#postgresql-configuration))
 
@@ -380,7 +380,7 @@ Otherwise you have two options:
 
 ### Files
 
-I recommand you to create a folder where you will download all the required files:
+I recommend you to create a folder where you will download all the required files:
 ```bash
 mkdir ~/OpenSILEX
 ```
@@ -444,7 +444,7 @@ Right click on connection name -> `Create Database` -> enter a name (`phis` in t
 
 Go to http://localhost:8080/. You are in Tomcat server home page.
 
-Click on `Manager App`, connect with your  Tomcat user (a default user is configured in the `home/tomcat/apache-tomcat/tomcat-users.xml` configuration file).  
+Click on `Manager App`, connect with your  Tomcat user (a default user is configured in the `home/tomcat/apache-tomcat/tomcat-users.xml` configuration file).
 
 Search `rdf4j-workbench` in the list, if isn't running, click on `Start`)
 
@@ -460,9 +460,9 @@ Click `Next` and check if is corresponds to this:
 
 Click `Create`.
 
-You will do these steps many times:  
+You will do these steps many times:
 
-Now, Click `Add` in the `Modify` submenu.  
+Now, Click `Add` in the `Modify` submenu.
 
 ![rdf4j-add](img/rdf4j-add.png)
 
@@ -503,7 +503,7 @@ ALTER USER opensilex WITH ENCRYPTED PASSWORD 'azerty';
 
 #### Create the database
 
-We recommand to name the PostgreSQL database with your experimental installation's name.
+We recommend to name the PostgreSQL database with your experimental installation's name.
 Create the PostgreSQL database with the following command:
 ```sql
 CREATE DATABASE <experimental_installation_name> OWNER opensilex;
@@ -564,7 +564,7 @@ To start using or trying OpenSILEX PHIS, two users are created automatically:
 * admin@opensilex.org/admin for administrative rights
 * guest@opensilex.org/guest for restricted rights
 See [OpenSILEX PHIS user documentation](https://opensilex.github.io/phis-docs-community/) for further explanation on users management and how to add new users.
-We recommand you to change the admin password.
+We recommend you to change the admin password.
 
 Check the [OpenSILEX PHIS user documentation](https://github.com/OpenSILEX/phis-docs-community) for more informations about users (eg. adding other users).
 
@@ -886,11 +886,11 @@ sudo systemctl restart postgresql
 
 ### Errors with the web service
 
-+ Errors with the generation of the WAR file  
++ Errors with the generation of the WAR file
 
 In Netbeans, right click on the project name -> `Resolve problems`.
 
-If it detects plugin problems, I recommand you to fix them yourself with the menu : `Tools` -> `Plugins`.
+If it detects plugin problems, I recommend you to fix them yourself with the menu : `Tools` -> `Plugins`.
 If it appears to be another problem, you can try to fix it with the `Resolve` button.
 
 But if the problem persists, it probably comes from a modification in a project file. You can try to find it, to reopen the project or to remove all the OpenSILEX web service files and reload them).
