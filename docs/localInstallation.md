@@ -211,7 +211,7 @@ You can launch Netbeans from its installation folder by executing the `netbeans`
 ```
 
 #### PHP
-Install PHP 7.0 executing the following commands:
+Install PHP (version 7.0 or higher, OpenSILEX supports also PHP 7.2) executing the following commands:
 ```{bash}
 sudo apt-get update
 sudo apt-get install php php-mbstring php-dom
@@ -220,8 +220,6 @@ Check your PHP version from a terminal:
 ```{bash}
 php --version
 ```
-
-OpenSILEX does currently not support PHP 7.2. Developments are being made to provide this compatibility.
 
 #### Apache Tomcat and RDF4J
 
