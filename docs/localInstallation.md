@@ -396,12 +396,12 @@ Check the latest release tag at [phis-ws/releases](https://github.com/OpenSILEX/
 
 #### Web application folder
 
-Get source from GitHub, directly from the phis-webapp development repository, indicating the latest stable release (e.g. `3.2.5` in July 2020) :
+Get source from GitHub, directly from the phis-webapp development repository, indicating the latest stable release :
 ```bash
 cd ~/OpenSILEX
-git clone --branch 3.2.5 https://github.com/OpenSILEX/phis-webapp.git
+git clone --branch <latest release tag> https://github.com/OpenSILEX/phis-webapp.git
 ```
-Check the latest release tag at [phis-webapp/releases](https://github.com/OpenSILEX/phis-webapp/releases). If it differs from `3.2.5`, then change the command line above, replacing `3.2.5` by the latest release tag.
+Check the latest release tag at [phis-webapp/releases](https://github.com/OpenSILEX/phis-webapp/releases) and change the command line above, replacing `<latest release tag>` by the latest release tag (e.g. `3.2.5` in July 2020).
 
 #### Ontology files
 
