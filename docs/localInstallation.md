@@ -5,8 +5,8 @@ layout: default
 # OpenSILEX PHIS Deployment
 
 1. [Prerequisite](#1-prerequisite)
-   * [Hardware](#hardware)  
-   * [Software](#software)  
+   * [Hardware](#hardware)
+   * [Software](#software)
      + [MongoDB and Robo 3T](#mongodb-and-robo-3t)
      + [Netbeans and JDK](#netbeans-and-jdk)
      + [Postgresql and PostGIS](#postgresql-and-postgis)
@@ -36,7 +36,7 @@ layout: default
    * [Other problems concerning the web application and the web service](#other-problems-with-the-webapp-and-the-web-service)
 
 ## Introduction
-This document explains you how to deploy OpenSILEX PHIS on your personnal computer.  
+This document explains you how to deploy OpenSILEX PHIS on your personnal computer.
 In this document, commands are for **Ubuntu 16.04**. However, the majority of these commands are compatible with all Debian distributions which have the package manager Aptitude.
 
 ## 1. Prerequisite
@@ -144,8 +144,9 @@ In a terminal, run these commands:
 ```bash  
  sudo apt-get update
  sudo apt-get install postgresql
- sudo apt-get install postgresql-9.5-postgis-2.2
 ```
+
+PostgreSQL version should be **at least** 9.5, so you can use the command `sudo apt-get install postgresql-9.5-postgis-2.2`, or, better : `sudo apt install postgresql-10-postgis-2.4`
 
 Locate the PostgreSQL client with:
 ```{bash}
