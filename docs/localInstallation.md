@@ -626,7 +626,7 @@ mvn install -Ptest
 With no `-P` option, `dev` profile is used.
 
 **Note**<br/>
-If you use netbeans to deploy war file in the Tomcat server, the default port is **8084** but in this document we choose to deploy ourselves our war files so the port need to be the Tomcat service port **8080**.  
+If you use netbeans to deploy war file in the Tomcat server, the default port is **8084** but in this document we choose to deploy ourselves our war files so the port need to be the Tomcat service port **8080**.
 The choice of deploying ourselves our war files is justified by the universality of the procedure. Netbeans is heavy and some pc can have difficulty to run it and other softwares at the same time.
 Using Netbeans enables you to deploy more quickly.
 
@@ -688,6 +688,11 @@ ws.images.url=http://127.0.0.1/images
 ws.layers.dir=/var/www/html/layers
 ws.layers.url=http://127.0.0.1/layers
 ```
+
+**Note**<br/>
+
+The path that you specify in **ws.log.dir** has to match an existing folder.
+You may need to create one. You can choose freely where to store the log files as their location has little significance.
 
 #### Generate WAR file
 
