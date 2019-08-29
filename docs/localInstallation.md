@@ -655,11 +655,14 @@ pg.user=opensilex
 pg.password=azerty
 
 # RDF4J Configuration
+rdf.base.uri=http://www.opensilex.org/
 rdf.host=127.0.0.1
 rdf.port=8080
 rdf.path=rdf4j-server
-rdf.infra=opensilex
+rdf.infra=<platform name>
+rdf.infra.code=<platform code>
 rdf.repo=opensilex
+rdf.vocabulary.context=http://www.opensilex.org/vocabulary/oeso
 
 # Webservice configuration
 ws.log.dir=/home/tomcat/apache-tomcat/logs/opensilex-ws
