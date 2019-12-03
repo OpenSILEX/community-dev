@@ -8,45 +8,58 @@ layout: default
 
 We are using the DTO (Data Transfert Object) and the DAO (Data Access Object) design patterns.
 
+### Model
+A model is used to represent a concept manipulated in the web service. 
+
+It only contains attributes and eventually business oriented methods. It doesn't contain any storage or technological references. 
+
 ### DTO
+
+A DTO is a object used to carry a model between the web service and the clients.
+
 ![dto-schema](img/dto.png)
 
-The DTO objects corresponds to the formats used to exchange with the clients.
+A DTO does not have any behavior except for storage, retrieval, serialization and deserialization of its own data (mutators, accessors, parsers and serializers). In other words, DTOs are simple objects that should not contain any business logic.
 
 ### DAO
+
+A DAO is an object that provides an abstract interface to some type of database or other persistence mechanism. 
+
+By mapping application calls to the persistence layer, the DAO provides some specific data operations without exposing details of the database. This isolation supports the single responsibility principle. It separates what data access the application needs, in terms of domain-specific objects and data types (the public interface of the DAO), from how these needs can be satisfied with a specific DBMS, database schema, etc. (the implementation of the DAO).
+
 ![dao-schema](img/dao.png)
 
-The DAO (Data Access Object) manipulates only models. It does the CRUD access to the different data sources (e.g. triplestore, relational database, nosql, other web services, ...).
+It implements the CRUD functions to the different data sources (e.g. triplestore, relational database, nosql, other web services, etc.)
+A DAO only manipulates models and don't know anything about DTO objects.
 
-### Models
-The models are used to represents the concepts which are gonna be manipulated inside the web service. The DAO only manipulates models and does not know the DTO structures. Before using a DAO, we must convert the DTO given by the user in a model. The DAO will then return a model which will be converted in the DTO corresponding to the representation of the object that will be returned.
+Therefore before calling a DAO, the DTO objects recieved must be converted into models. These models are sent to the DAO. The DAO query the storage and eventually returns models.
 
-![dao-dto-model](img/global_dao_dto_model.png)
+These models are converted into DTO objects. They take part in the data returned by the web service to the client.
 
-## Rdf Resource Definition
-To represents and manipulate the triplestore resources (instances or concepts), we have created models, DAO and DTO.
+![dao-dto-model](img/web_service_architecture.png)
 
-### Rdf Resource Definition model
+## RDF resource definition
+To represent and manipulate the triplestore resources (instances or concepts), we have created models, DAO and DTO.
+
+### RDF resource definition model
 To manipulate a resource (instance or concept), we extends the RdfResourceDefinition model, such as the following example.
 
 ![rdf-resource-definition-model](img/rdfResourceDefinition.png)
 
-### Rdf Resource Definiton DTO
-A few services returns more or less the same rdf resource definition JSON format. We have created a few DTO which are extended. In the following example, the RadiometricTargetDTO extends the RdfResourceDefinitionDTO and the RadiometricTargetPostDTO extends the RdfResourceDefinitionPostDTO. We have created a specific package which will contain all the DTO of the radiometric targets.
+### RDF resource definiton DTO
+A few services returns more or less the same RDF resource definition JSON format. We have created a few DTOs which extends RdfResourceDefinitionDTO. In the following example, the RadiometricTargetDTO extends RdfResourceDefinitionDTO and RadiometricTargetPostDTO extends RdfResourceDefinitionPostDTO. We have created a specific package to group the DTOs concerning the radiometric targets.
 
 ![rdf-resource-definition-dto](img/rdfResourceDefinitionDTO.png)
 
 ### Property DAO
-To manipulate the properties extracted from a semantic triplestore, we use the PropertyDAOSesame class.
+To manipulate the properties extracted from a semantic triplestore, we use the PropertyDAO class.
 
-## How to create new services ?
+## How to create new services?
 You can base your new service on the Provenance and Radiometric Target services.
-1. Create the service class in the resources package (e.g. phis2ws.service.resources.ProvenanceResourceService).
-2. Create the DTO (e.g. phis2ws.service.resources.dto.provenance.ProvenanceDTO).
-3. Create the model (e.g. phis2ws.service.view.model.phis.provenance.Provenance).
-4. Create the DAO if needed (e.g. phis2ws.service.dao.mongo.ProvenanceDAOMongo).
-5. Create the ResponseForm (e.g. phis2ws.service.view.brapi.form.ResponseFormProvenance).
-
+1. Create the model of the concept manipulated by the service if not existing (e.g. `opensilex.service.view.model.provenance.Provenance`).
+2. Create the DTO that your service will manipulate. It must at least extends `AbstractVerifiedClass` (e.g. `opensilex.service.resources.dto.provenance.ProvenanceDTO`).
+3. Create the service class extending `ResourceService` in the `resources` package (e.g. `opensilex.service.resources.ProvenanceResourceService`).
+4. Create or complete the DAOs corresponding to the models your service manipulates (e.g. `opensilex.service.dao.ProvenanceDAO`). The DAO must at least extends the `DAO` class. The only functions of your DAO class accessible by your resource service class must by one of those define in the `DAO.java` class (create, delete, update, find, findById).
 
 ## Java Bean Validation (JSR 380)
 
@@ -54,7 +67,7 @@ When you create a new service, you must use the [Java Bean Validation](https://b
 
 ### Use an existing constraint validation
 
-You can add a verification on the DTO for the post and the ResourceService classes for the get parameters. To do that, you must add an annotation such as `@Required`.
+You can add a verification on the DTO for the POST and the ResourceService classes for the GET parameters. To do that, you must add an annotation such as `@Required`.
 
 In the folowing example, the parameter `url` of the method `get` of the `ExampleResourceService` is required (`@Required`) and must be a valid url (`@Url`).
 
@@ -147,7 +160,7 @@ Create the custom validation annotation interface in the package `service.resour
 
 ```java
 @Target(value={METHOD,FIELD,ANNOTATION_TYPE,CONSTRUCTOR,PARAMETER}) //The annotation can be applied to a method, a parameter, etc.
-@Retention(RUNTIME) //The annotation should be available for reflection at runtime. Example : @Deprecated (see https://docs.oracle.com/javase/7/docs/api/java/lang/annotation/RetentionPolicy.html)
+@Retention(RUNTIME) //The annotation should be available for reflection at runtime. Example: @Deprecated (see https://docs.oracle.com/javase/7/docs/api/java/lang/annotation/RetentionPolicy.html)
 @Constraint(validatedBy = {URLValidator.class,URLListValidator.class}) //The constraint is validated by the URLValidator and the URLListValidator (to validate lists of url)
 public @interface URL {
     String message() default "is not an URL"; //The message element value is used to create the error message. (see https://beanvalidation.org/2.0/spec/#validationapi-message)
